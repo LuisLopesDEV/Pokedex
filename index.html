@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +14,9 @@
 
   <title>Pokédex</title>
 </head>
+
 <body>
-  
+
   <main>
     <img src="#" alt="pokemon" class="pokemon__image">
 
@@ -23,22 +25,25 @@
       <span class="pokemon__name"></span>
     </h1>
 
+    <span class="pokemon__type"></span>
+
     <form class="form">
-      <input
-        type="search"
-        class="input__search"
-        placeholder="Name or Number"
-        required
-      />
+      <input type="search" class="input__search" placeholder="Name or Number" required />
     </form>
+
+    <span class="pokemon__hp"> </span>
+    <span class="pokemon__attack"> </span>
+
+    <span id="shinySpan"><input type="checkbox" value="Shiny" class="shiny" >Shiny</span>
 
     <div class="buttons">
       <button class="button btn-prev">Prev &lt;</button>
       <button class="button btn-next">Next &gt;</button>
     </div>
 
-    <img src="imagens/pokedex.png" alt="pokedex" class="pokedex">
+    <img src="imagens/PokedexDupla.png" alt="pokedex" class="pokedex">
   </main>
 
 </body>
+
 </html>
