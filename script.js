@@ -5,6 +5,7 @@ const pokemonType = document.querySelector('.pokemon__type')
 const pokemonHp = document.querySelector('.pokemon__hp')
 const pokemonAttack = document.querySelector('.pokemon__attack')
 
+
 const form = document.querySelector('.form');
 const input = document.querySelector('.input__search');
 const checkShiny = document.querySelector('.shiny');
@@ -17,7 +18,7 @@ let data;
 const fetchPokemon = async (pokemon) => {
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
     if (APIResponse.status === 200) {
-         data = await APIResponse.json();
+        data = await APIResponse.json();
         return data;
     }
 }
@@ -26,6 +27,7 @@ const renderPokemon = async (pokemon) => {
     input.value = '';
     pokemonName.innerHTML = 'Loading...';
     pokemonNumber.innerHTML = '';
+
 
     const data = await fetchPokemon(pokemon);
     const types = data.types.map(info => info.type.name);
@@ -48,11 +50,17 @@ const renderPokemon = async (pokemon) => {
     }
 }
 
+
 const pokeImage = () => {
     if (data && checkShiny.checked) {
         pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_shiny'];
+
+    } else if (data && data.id > 649) {
+        pokemonImage.src = data['sprites']['versions']['generation-viii']['icons']['front_default'];
+        pokemonImage.style.height = '31%'
     } else if (data) {
         pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+
     }
 }
 
@@ -61,7 +69,7 @@ form.addEventListener('submit', (event) => {
     renderPokemon(input.value.toLowerCase());
 });
 
-checkShiny.addEventListener('change', function() {
+checkShiny.addEventListener('change', function () {
     pokeImage();
 });
 
