@@ -9,6 +9,7 @@ const pokemonAttack = document.querySelector('.pokemon__attack')
 const form = document.querySelector('.form');
 const input = document.querySelector('.input__search');
 const checkShiny = document.querySelector('.shiny');
+const checkGen = document.querySelector('.gen');
 const buttonPrev = document.querySelector('.btn-prev');
 const buttonNext = document.querySelector('.btn-next');
 
@@ -52,24 +53,28 @@ const renderPokemon = async (pokemon) => {
 
 
 const pokeImage = () => {
-    if (data && checkShiny.checked) {
-        pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_shiny'];
 
-    } else if (data && data.id > 649) {
-        pokemonImage.src = data['sprites']['versions']['generation-viii']['icons']['front_default'];
-        pokemonImage.style.height = '31%'
-    } else if (data) {
-        pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
-
+    if (checkGen.checked) {
+        sprite = data.sprites.versions['generation-v']['black-white'].animated;
+    } else {
+        sprite = data.sprites.other.showdown;
     }
-}
+
+    pokemonImage.src = checkShiny.checked
+        ? sprite.front_shiny
+        : sprite.front_default;
+};
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     renderPokemon(input.value.toLowerCase());
 });
 
-checkShiny.addEventListener('change', function () {
+checkShiny.addEventListener('change', () => {
+    pokeImage();
+});
+
+checkGen.addEventListener('change', () => {
     pokeImage();
 });
 
